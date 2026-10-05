@@ -1,26 +1,20 @@
-#Space Launch / NASA Picture of the Day :
-import requests
+import urllib.request
+import json
 
-API_KEY = "DEMO_KEY"
+url = "https://api64.ipify.org?format=json"
 
-url = "https://api.nasa.gov/planetary/apod"
+try:
 
-params = {
-    "api_key": API_KEY
-}
+    response = urllib.request.urlopen(url, timeout=10)
 
-response = requests.get(url, params=params)
+    data = response.read().decode("utf-8")
 
-if response.status_code == 200:
-    data = response.json()
+    result = json.loads(data)
 
-    print("\n🚀 NASA Picture of the Day")
-    print("Title:", data["title"])
-    print("Date:", data["date"])
-    print("Explanation:")
-    print(data["explanation"])
+    print("\n========== PUBLIC IP ==========")
+    print("Your Public IP Address:", result["ip"])
 
-    print("\nImage/Video:", data["url"])
+except Exception as error:
 
-else:
-    print("Could not get NASA data.")
+    print("Unable to retrieve IP address.")
+    print("Error:", error)
