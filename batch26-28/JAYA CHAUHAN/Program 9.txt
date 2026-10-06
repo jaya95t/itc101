@@ -1,20 +1,35 @@
  # What Should I Do Today?" Generator:
-import requests
+import random
 
-url = "https://www.boredapi.com/api/activity"
+activities = [
+    "Read a book",
+    "Go for a walk",
+    "Listen to music",
+    "Watch a movie",
+    "Draw something",
+    "Clean your room",
+    "Learn something new",
+    "Call a friend",
+    "Do some exercise",
+    "Cook something new"
+]
 
-response = requests.get(url)
+types = [
+    "education",
+    "recreational",
+    "social",
+    "relaxation",
+    "creative"
+]
 
-if response.status_code == 200:
+activity = random.choice(activities)
+activity_type = random.choice(types)
+participants = random.randint(1, 4)
 
-    data = response.json()
+print()
+print("Your activity:")
+print(activity)
+print("Type:", activity_type)
+print("Participants:", participants)
 
-    print("\n💡 Your activity:")
-    print(data["activity"])
-
-    print("Type:", data["type"])
-    print("Participants:", data["participants"])
-
-else:
-    print("Couldn't find an activity.")
 
